@@ -1,0 +1,36 @@
+<div class="badge-avatar-frame-settings">
+  <h3>{{i18n "admin.badges.avatar_frame_settings"}}</h3>
+  
+  <div class="control-group">
+    <label class="checkbox-label">
+      {{input type="checkbox" checked=controller.avatarFrameEnabled}}
+      {{i18n "admin.badges.avatar_frame_enabled"}}
+    </label>
+  </div>
+  
+  {{#if controller.avatarFrameEnabled}}
+    <div class="control-group">
+      <label>{{i18n "admin.badges.avatar_frame_url"}}</label>
+      {{input type="text" value=controller.avatarFrameUrl class="input-xxlarge"}}
+    </div>
+    
+    <div class="control-group">
+      <button {{action "uploadAvatarFrame"}} class="btn">
+        {{i18n "admin.badges.upload_avatar_frame"}}
+      </button>
+    </div>
+    
+    {{#if controller.avatarFrameUrl}}
+      <div class="badge-avatar-frame-preview">
+        <img src="https://via.placeholder.com/80" alt="Avatar placeholder">
+        <div class="badge-avatar-frame" style="background-image: url('{{controller.avatarFrameUrl}}')"></div>
+      </div>
+    {{/if}}
+  {{/if}}
+  
+  <div class="control-group">
+    <button {{action "saveAvatarFrameSettings"}} class="btn btn-primary">
+      {{i18n "admin.badges.save_frame_settings"}}
+    </button>
+  </div>
+</div>

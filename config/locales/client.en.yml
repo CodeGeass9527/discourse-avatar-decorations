@@ -1,9 +1,9 @@
 en:
-  admin_js:
-    admin:
-      site_settings:
-        categories:
-          TODO_plugin_name: "Plugin Name"
   js:
-    discourse_plugin_name:
-      placeholder: placeholder
+    admin:
+      badges:
+        avatar_frame_settings: "Avatar frame settings"
+        avatar_frame_enabled: "Enable avatar frame decoration"
+        avatar_frame_url: "Avatar frame image URL"
+        upload_avatar_frame: "Upload avatar frame image"
+        save_frame_settings: "Save avatar frame settings"
