@@ -77,25 +77,21 @@ export default {
       // 装饰用户卡片头像
       api.reopenWidget("user-card-avatar", {
         buildClasses() {
-          return "user-card-avatar";
+          return `${this._super(attrs)} user-card-avatar`;
         },
 
         html(attrs) {
           const user = attrs.user;
 
           const result = this._super(attrs);
-
-          if (user && user.avatar_frame_url) {
-            result.push(
-              this.h("div.badge-avatar-frame", {
-                attributes: {
-                  style: `background-image: url('${user.avatar_frame_url}')`,
-                },
-              })
-            );
-          }
-
-          return result;
+          return [
+            ...result,
+            this.h("div.badge-avatar-frame", {
+              attributes: {
+                style: `background-image: url('${user.avatar_frame_url}')`,
+              },
+            }),
+          ];
         },
       });
 
