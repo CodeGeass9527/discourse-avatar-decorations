@@ -10,7 +10,7 @@
 
 enabled_site_setting :avatar_frame_enabled
 
-register_asset "stylesheets/avatar-frame.scss"
+register_asset "stylesheets/common/badge-avatar-frame.scss"
 
 after_initialize do
 
