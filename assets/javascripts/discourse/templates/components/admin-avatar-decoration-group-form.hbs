@@ -1,0 +1,43 @@
+<DModal @title={{title}} @closeModal={{action closeModal}}>
+  <:body>
+    <div class="avatar-decoration-group-form">
+      <div class="input-group">
+        <label for="group-name">{{i18n "avatar_decorations.admin.groups.name"}}</label>
+        <Input @type="text" @value={{groupName}} id="group-name" class="group-name" />
+      </div>
+      
+      <div class="input-group">
+        <label for="group-description">{{i18n "avatar_decorations.admin.groups.description"}}</label>
+        <Textarea @value={{groupDescription}} id="group-description" class="group-description" />
+      </div>
+      
+      <div class="decorations-selection">
+        <label>{{i18n "avatar_decorations.admin.select_decorations"}}</label>
+        
+        <div class="decorations-list">
+          {{#each model.decorations as |decoration|}}
+            <div class="decoration-item {{if (includes selectedDecorationIds decoration.id) "selected"}}">
+              <label>
+                <Input 
+                  @type="checkbox" 
+                  checked={{includes selectedDecorationIds decoration.id}} 
+                  {{on "click" (action "toggleDecoration" decoration.id)}} />
+                <div class="decoration-info">
+                  <img src={{decoration.image_url}} alt={{decoration.name}} class="decoration-image" />
+                  <span class="decoration-name">{{decoration.name}}</span>
+                </div>
+              </label>
+            </div>
+          {{else}}
+            <p class="no-decorations">{{i18n "avatar_decorations.admin.no_decorations"}}</p>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </:body>
+  
+  <:footer>
+    <DButton @action={{action closeModal}} @label="cancel" class="btn-cancel" />
+    <DButton @action={{action "save"}} @label="save" class="btn-primary" @disabled={{saving}} />
+  </:footer>
+</DModal>

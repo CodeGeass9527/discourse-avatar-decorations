@@ -1,1 +1,12 @@
 en:
+  site_settings:
+    avatar_decorations_enabled: "Enable user avatar decorations feature"
+  
+  avatar_decorations:
+    errors:
+      not_allowed: "You are not allowed to use this decoration"
+      not_found: "The selected decoration does not exist"
+      group_not_found: "The decoration group does not exist"
+      already_in_group: "User is already in this decoration group"
+      not_in_group: "User is not in this decoration group"
+      in_use: "This decoration is currently being used by %{count} users and cannot be deleted"

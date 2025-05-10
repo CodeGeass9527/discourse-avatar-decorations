@@ -1,0 +1,53 @@
+<div class="avatar-decoration-preferences">
+  <h3>{{i18n "avatar_decorations.user.select_decoration"}}</h3>
+  
+  {{#if loading}}
+    <div class="spinner"></div>
+  {{else}}
+    <div class="avatar-decoration-options">
+      <div class="avatar-decoration-option">
+        <label>
+          <input type="radio" name="avatar-decoration" value="" 
+                 checked={{eq model.custom_fields.selected_avatar_decoration_id undefined}} 
+                 onclick={{action "selectDecoration" undefined}}>
+          <span>{{i18n "avatar_decorations.user.no_decoration"}}</span>
+        </label>
+      </div>
+      
+      {{#each availableDecorations as |decoration|}}
+        <div class="avatar-decoration-option">
+          <label>
+            <input type="radio" name="avatar-decoration" value={{decoration.id}} 
+                   checked={{eq model.custom_fields.selected_avatar_decoration_id decoration.id}} 
+                   onclick={{action "selectDecoration" decoration.id}}>
+            <span class="avatar-decoration-preview">
+              <img src={{decoration.image_url}} alt={{decoration.name}}>
+              <span>{{decoration.name}}</span>
+            </span>
+          </label>
+        </div>
+      {{else}}
+        <p class="no-decorations">{{i18n "avatar_decorations.user.no_available_decorations"}}</p>
+      {{/each}}
+    </div>
+    
+    <div class="control-group">
+      <button class="btn btn-primary" 
+              disabled={{loading}} 
+              {{action "saveDecoration"}}>
+        {{#if saving}}
+          {{i18n "saving"}}
+        {{else}}
+          {{i18n "avatar_decorations.user.save"}}
+        {{/if}}
+      </button>
+      
+      {{#if saved}}
+        <span class="saved-message">
+          {{d-icon "check"}}
+          {{i18n "avatar_decorations.user.saved"}}
+        </span>
+      {{/if}}
+    </div>
+  {{/if}}
+</div>
