@@ -8,7 +8,7 @@
 # url: https://github.com/CodeGeass9527/discourse-badge-avatar-frame
 # required_version: 2.7.0
 
-enabled_site_setting :avatar_frame_enabled
+register_site_setting :avatar_frame_enabled, type: :bool, default: false, client: true
 
 register_asset "stylesheets/avatar-frame.scss"
 

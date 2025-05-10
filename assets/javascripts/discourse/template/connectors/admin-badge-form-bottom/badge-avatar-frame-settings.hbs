@@ -19,8 +19,11 @@
     </div>
     {{#if @controller.avatarFrameUrl}}
       <div class="badge-avatar-frame-preview">
-        <img src="https://via.placeholder.com/80" alt="Avatar placeholder">
-        <div class="badge-avatar-frame" style={{html-safe (concat "background-image: url('" @controller.avatarFrameUrl "')")}}></div>
+        <img src="https://via.placeholder.com/80" alt="Avatar placeholder" />
+        <div
+          class="badge-avatar-frame"
+          style={{html-safe (concat "background-image: url('" @controller.avatarFrameUrl "')")}}
+        ></div>
       </div>
     {{/if}}
   {{/if}}
