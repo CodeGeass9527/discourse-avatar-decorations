@@ -7,16 +7,19 @@
       {{i18n "admin.badges.avatar_frame_enabled"}}
     </label>
   </div>
+
   {{#if @controller.avatarFrameEnabled}}
     <div class="control-group">
       <label>{{i18n "admin.badges.avatar_frame_url"}}</label>
       {{input type="text" value=@controller.avatarFrameUrl class="input-xxlarge"}}
     </div>
+
     <div class="control-group">
       <button type="button" {{action "uploadAvatarFrame"}} class="btn">
         {{i18n "admin.badges.upload_avatar_frame"}}
       </button>
     </div>
+
     {{#if @controller.avatarFrameUrl}}
       <div class="badge-avatar-frame-preview">
         <img src="https://via.placeholder.com/80" alt="Avatar placeholder" />
@@ -27,6 +30,7 @@
       </div>
     {{/if}}
   {{/if}}
+
   <div class="control-group">
     <button type="submit" {{action "saveAvatarFrameSettings"}} class="btn btn-primary">
       {{i18n "admin.badges.save_frame_settings"}}
