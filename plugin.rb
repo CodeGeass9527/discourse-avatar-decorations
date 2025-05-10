@@ -13,9 +13,9 @@ enabled_site_setting :avatar_frame_enabled
 register_asset "stylesheets/avatar-frame.scss"
 
 after_initialize do
-  # 创建badge_custom_fields存储徽章头像框设置
-  BadgeCustomField.register_column :avatar_frame_enabled, :boolean
-  BadgeCustomField.register_column :avatar_frame_url, :string
+  # 注册徽章自定义字段
+  register_badge_custom_field_type("avatar_frame_enabled", :boolean)
+  register_badge_custom_field_type("avatar_frame_url", :string, max_length: 1000)
   
   # 扩展Badge类，添加头像框相关方法
   add_to_class :badge, :avatar_frame_enabled do
