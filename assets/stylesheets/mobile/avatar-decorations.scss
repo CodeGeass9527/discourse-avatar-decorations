@@ -1,0 +1,200 @@
+// 移动设备上的头像装饰样式
+
+// 控制在移动设备上头像装饰的尺寸和位置
+.avatar-decoration {
+    // 在小屏幕设备上使装饰图标相对小一些
+    width: 25px !important;
+    height: 25px !important;
+    top: -3px !important;
+    right: -3px !important;
+  }
+  
+  // 用户偏好设置页的移动端样式优化
+  .avatar-decoration-preferences {
+    // 在移动设备上使布局更垂直化
+    margin-top: 15px;
+    
+    h3 {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+    
+    // 让选项垂直排列
+    .avatar-decoration-options {
+      flex-direction: column;
+      
+      .avatar-decoration-option {
+        margin-right: 0;
+        margin-bottom: 15px;
+        padding-bottom: 10px;
+        border-bottom: 1px solid var(--primary-low);
+        
+        &:last-child {
+          border-bottom: none;
+        }
+        
+        label {
+          display: flex;
+          align-items: center;
+        }
+        
+        .avatar-decoration-preview {
+          img {
+            max-width: 30px;
+            max-height: 30px;
+          }
+        }
+      }
+    }
+    
+    // 保存按钮区域优化
+    .control-group {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      
+      button {
+        margin-bottom: 10px;
+        width: 100%;
+      }
+      
+      .saved-message {
+        margin-left: 0;
+      }
+    }
+  }
+  
+  // 管理员界面的移动端样式优化
+  .avatar-decorations-admin {
+    .avatar-decorations-list {
+      .avatar-decoration-item {
+        // 在移动设备上改为垂直排列
+        flex-direction: column;
+        padding: 12px;
+        
+        .avatar-decoration-image {
+          width: 100%;
+          text-align: center;
+          margin-bottom: 10px;
+          
+          img {
+            max-height: 50px;
+          }
+        }
+        
+        .avatar-decoration-info {
+          margin-left: 0;
+          text-align: center;
+          margin-bottom: 10px;
+          
+          h3 {
+            margin: 0 0 5px 0;
+            font-size: 16px;
+          }
+        }
+        
+        .avatar-decoration-controls {
+          width: 100%;
+          justify-content: center;
+          
+          button {
+            margin: 0 5px;
+            padding: 6px 10px;
+          }
+        }
+      }
+    }
+  }
+  
+  // 装饰组管理页面的移动端样式
+  .avatar-decoration-groups-admin {
+    .avatar-decoration-groups-list {
+      // 移动端表格优化
+      th, td {
+        padding: 8px 10px;
+        font-size: 14px;
+      }
+      
+      // 移动设备上隐藏某些列，保留必要信息
+      th:nth-child(2), td:nth-child(2) {
+        display: none;
+      }
+      
+      // 操作按钮调整
+      .actions {
+        button {
+          padding: 5px;
+          margin: 2px;
+        }
+      }
+    }
+  }
+  
+  // 模态框内部样式优化
+  .avatar-decoration-group-form, .avatar-decoration-form {
+    .input-group {
+      margin-bottom: 12px;
+    }
+    
+    // 装饰选择区域移动端优化
+    .decorations-selection {
+      .decorations-list {
+        .decoration-item {
+          width: 100%;
+          margin: 5px 0;
+        }
+      }
+    }
+  }
+  
+  // 用户管理模态框的移动端样式
+  .avatar-decoration-group-users {
+    .user-search {
+      flex-direction: column;
+      
+      .user-search-input {
+        margin-right: 0;
+        margin-bottom: 10px;
+        width: 100%;
+      }
+      
+      button {
+        width: 100%;
+      }
+    }
+    
+    .search-results {
+      .user-result {
+        padding: 10px;
+      }
+    }
+    
+    .selected-users {
+      .selected-user {
+        padding: 8px 0;
+      }
+      
+      .add-users-button {
+        width: 100%;
+      }
+    }
+    
+    .current-users-section {
+      .user-list {
+        max-height: 200px;
+        
+        .user-item {
+          .avatar {
+            width: 25px;
+            height: 25px;
+          }
+        }
+      }
+    }
+    
+    // 确保底部按钮填满宽度
+    .d-modal__footer button {
+      flex: 1;
+    }
+  }
+  

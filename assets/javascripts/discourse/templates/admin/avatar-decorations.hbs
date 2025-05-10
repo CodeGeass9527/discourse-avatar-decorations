@@ -1,0 +1,32 @@
+<div class="avatar-decorations-admin">
+  <h1>{{i18n "avatar_decorations.admin.title"}}</h1>
+  
+  <div class="admin-controls">
+    <div class="buttons">
+      <DButton @action={{action "newDecoration"}} @icon="plus" @label="avatar_decorations.admin.add_new" class="btn-primary" />
+    </div>
+  </div>
+  
+  {{#if loading}}
+    <div class="spinner"></div>
+  {{else}}
+    <div class="avatar-decorations-list">
+      {{#each decorations as |decoration|}}
+        <div class="avatar-decoration-item">
+          <div class="avatar-decoration-image">
+            <img src={{decoration.image_url}} alt={{decoration.name}}>
+          </div>
+          <div class="avatar-decoration-info">
+            <h3>{{decoration.name}}</h3>
+          </div>
+          <div class="avatar-decoration-controls">
+            <DButton @action={{action "editDecoration" decoration}} @icon="pencil-alt" class="btn-default" />
+            <DButton @action={{action "deleteDecoration" decoration}} @icon="trash-alt" class="btn-danger" />
+          </div>
+        </div>
+      {{else}}
+        <p class="no-decorations">{{i18n "avatar_decorations.admin.no_decorations"}}</p>
+      {{/each}}
+    </div>
+  {{/if}}
+</div>

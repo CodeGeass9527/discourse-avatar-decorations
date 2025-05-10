@@ -1,0 +1,52 @@
+// 头像装饰样式
+.avatar-wrapper {
+    position: relative;
+    
+    .avatar-decoration {
+      position: absolute;
+      top: -5px;
+      right: -5px;
+      width: 30px;
+      height: 30px;
+      background-size: contain;
+      background-repeat: no-repeat;
+      background-position: center;
+      z-index: 1;
+    }
+  }
+  
+  // 小型头像的装饰尺寸调整
+  .avatar-small .avatar-decoration {
+    width: 20px;
+    height: 20px;
+    top: -3px;
+    right: -3px;
+  }
+  
+  // 大型头像的装饰尺寸调整
+  .avatar-large .avatar-decoration {
+    width: 40px;
+    height: 40px;
+    top: -8px;
+    right: -8px;
+  }
+  
+  // 共享模态框样式
+  .avatar-decoration-form,
+  .avatar-decoration-group-form,
+  .avatar-decoration-group-users {
+    .input-group {
+      margin-bottom: 15px;
+      
+      label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+      }
+      
+      input, textarea {
+        width: 100%;
+      }
+    }
+  }
+  
