@@ -44,6 +44,10 @@ after_initialize do
     object.avatar_frame_url
   end
   
+  add_to_serializer :badge, :custom_fields, include_condition: false do
+    object.custom_fields
+  end
+  
   # 创建头像框控制器
   module ::DiscourseBadges
     class AvatarFrameController < ::ApplicationController

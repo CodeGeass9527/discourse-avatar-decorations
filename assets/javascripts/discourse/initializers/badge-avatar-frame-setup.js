@@ -24,7 +24,9 @@ export default {
                   {
                     type: "PUT",
                     data: {
-                      avatar_frame_enabled: this.avatarFrameEnabled,
+                      avatar_frame_enabled: this.avatarFrameEnabled
+                        ? "true"
+                        : "false",
                       avatar_frame_url: this.avatarFrameUrl,
                     },
                   }

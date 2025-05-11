@@ -6,7 +6,7 @@
       <label class="checkbox-label">
         <Input
           @type="checkbox"
-          @checked={{this.model.custom_fields.avatar_frame_enabled}}
+          @checked={{eq this.model.custom_fields.avatar_frame_enabled "true"}}
         />
         {{i18n "admin.badges.avatar_frame_enabled"}}
       </label>
@@ -18,7 +18,7 @@
         <Input
           @type="text"
           class="input-xxlarge"
-          @value={{this.model.custom_fields.avatar_frame_enabled}}
+          @value={{this.model.custom_fields.avatar_frame_url}}
         />
       </div>
 
