@@ -10,8 +10,8 @@ export default {
     withPluginApi("0.8.31", (api) => {
       // 扩展徽章编辑界面，添加头像框设置
       api.modifyClass("controller:admin-badges-show", {
-        avatarFrameEnabled: alias("model.avatar_frame_enabled"),
-        avatarFrameUrl: alias("model.avatar_frame_url"),
+        avatarFrameEnabled: alias("model.custom_fields.avatar_frame_enabled"),
+        avatarFrameUrl: alias("model.custom_fields.avatar_frame_url"),
 
         actions: {
           save() {
