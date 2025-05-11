@@ -97,27 +97,38 @@ after_initialize do
   
   # 扩展用户序列化器，获取头像框URL
   add_to_serializer :user, :avatar_frame_url do
-    # 获取用户当前佩戴的徽章中有头像框的
+    # 获取用户已启用的徽章，并按featured_rank排序
     frame_badge = UserBadge.where(user_id: object.id)
-                           .joins(:badge)
-                           .where("badges.enabled = true")
-                           .order("badges.badge_type_id DESC")
-                           .map(&:badge)
-                           .find { |badge| badge.avatar_frame_enabled && badge.avatar_frame_url.present? }
+                          .joins(:badge)
+                          .where("badges.enabled = true")
+                          .where("badges.show_posts = true")
+                          .where("badges.listable = true")
+                          .order("user_badges.featured_rank ASC")
+                          .first&.badge
     
-    frame_badge&.avatar_frame_url
+    # 只有当徽章启用了头像框并有URL时，才返回头像框URL
+    if frame_badge&.avatar_frame_enabled && frame_badge&.avatar_frame_url.present?
+      frame_badge.avatar_frame_url
+    else
+      nil
+    end
   end
   
   # 添加当前用户的头像框URL
   add_to_serializer :current_user, :avatar_frame_url do
-    # 获取用户当前佩戴的徽章中有头像框的
+    # 获取用户已启用的徽章，并按featured_rank排序
     frame_badge = UserBadge.where(user_id: object.id)
-                           .joins(:badge)
-                           .where("badges.enabled = true")
-                           .order("badges.badge_type_id DESC")
-                           .map(&:badge)
-                           .find { |badge| badge.avatar_frame_enabled && badge.avatar_frame_url.present? }
+                          .joins(:badge)
+                          .where("badges.enabled = true")
+                          .where("badges.show_posts = true")
+                          .where("badges.listable = true")
+                          .order("user_badges.featured_rank ASC")
+                          .first&.badge
     
-    frame_badge&.avatar_frame_url
+    # 只有当徽章启用了头像框并有URL时，才返回头像框URL
+    if frame_badge&.avatar_frame_enabled && frame_badge&.avatar_frame_url.present?
+      frame_badge.avatar_frame_url
+    else
+      nil
+    end
   end
-end
