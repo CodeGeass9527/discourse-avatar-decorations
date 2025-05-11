@@ -15,24 +15,17 @@ export default {
 
         actions: {
           save() {
-            // 调用原有的保存方法
-            this._super(...arguments)
-              .then(() => {
-                // 保存头像框设置
-                return ajax(
-                  `/admin/badges/${this.get("model.id")}/avatar_frame`,
-                  {
-                    type: "PUT",
-                    data: {
-                      avatar_frame_enabled: this.avatarFrameEnabled
-                        ? "true"
-                        : "false",
-                      avatar_frame_url: this.avatarFrameUrl,
-                    },
-                  }
-                );
-              })
-              .catch(popupAjaxError);
+            // 注入你插件管理的数据（比如从组件传来的值）
+            const extraAttrs = {
+              avatar_frame_url: this.get("model.avatar_frame_url"),
+              avatar_frame_display: this.get("model.avatar_frame_display"),
+            };
+
+            // 合并到 `model`，这样请求才会带上
+            this.model.setProperties(extraAttrs);
+
+            // 调用原有 save 方法（super 可能不行，这里直接复用内容）
+            this._super(...arguments);
           },
 
           uploadAvatarFrame() {

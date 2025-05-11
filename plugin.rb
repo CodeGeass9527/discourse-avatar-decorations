@@ -74,7 +74,7 @@ after_initialize do
   add_to_serializer :user, :avatar_frame_url do
     frame_badge = UserBadge.where(user_id: object.id)
       .joins(:badge)
-      .where("badges.enabled = true AND badges.show_posts = true AND badges.listable = true")
+      .where("badges.enabled = true AND badges.allow_title = true AND badges.listable = true")
       .order("user_badges.featured_rank ASC")
       .first&.badge
 
@@ -88,7 +88,7 @@ after_initialize do
   add_to_serializer :current_user, :avatar_frame_url do
     frame_badge = UserBadge.where(user_id: object.id)
       .joins(:badge)
-      .where("badges.enabled = true AND badges.show_posts = true AND badges.listable = true")
+      .where("badges.enabled = true AND badges.allow_title = true AND badges.listable = true")
       .order("user_badges.featured_rank ASC")
       .first&.badge
 
