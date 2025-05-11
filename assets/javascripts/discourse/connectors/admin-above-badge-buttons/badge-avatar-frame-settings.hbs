@@ -4,19 +4,22 @@
 
     <div class="control-group">
       <label class="checkbox-label">
-        {{input type="checkbox" checked=this.model.avatar_frame_enabled}}
+        <Input
+          @type="checkbox"
+          @checked={{this.model.custom_fields.avatar_frame_enabled}}
+        />
         {{i18n "admin.badges.avatar_frame_enabled"}}
       </label>
     </div>
 
-    {{#if this.model.avatar_frame_enabled}}
+    {{#if this.model.custom_fields.avatar_frame_enabled}}
       <div class="control-group">
         <label>{{i18n "admin.badges.avatar_frame_url"}}</label>
-        {{input
-          type="text"
-          value=this.model.avatarFrameUrl
+        <Input
+          @type="text"
           class="input-xxlarge"
-        }}
+          @value={{this.model.custom_fields.avatar_frame_enabled}}
+        />
       </div>
 
       <div class="control-group">
@@ -25,13 +28,17 @@
         </button>
       </div>
 
-      {{#if this.model.avatarFrameUrl}}
+      {{#if this.model.custom_fields.avatar_frame_url}}
         <div class="badge-avatar-frame-preview">
           <img src="https://via.placeholder.com/80" alt="Avatar placeholder" />
           <div
             class="badge-avatar-frame"
             style={{html-safe
-              (concat "background-image: url('" this.model.avatarFrameUrl "')")
+              (concat
+                "background-image: url('"
+                this.model.custom_fields.avatar_frame_url
+                "')"
+              )
             }}
           ></div>
         </div>
