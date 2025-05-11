@@ -14,126 +14,89 @@ register_asset "stylesheets/common/badge-avatar-frame.scss"
 
 after_initialize do
 
-  # 扩展Badge类，添加头像框相关方法
-  add_to_class :badge, :avatar_frame_enabled do
-    if custom_fields["avatar_frame_enabled"].nil?
-      false
-    else
-      custom_fields["avatar_frame_enabled"] == "true"
-    end
-  end
-  
-  add_to_class :badge, :avatar_frame_enabled= do |value|
-    self.custom_fields["avatar_frame_enabled"] = value ? "true" : "false"
-  end
-  
-  add_to_class :badge, :avatar_frame_url do
-    custom_fields["avatar_frame_url"]
-  end
-  
-  add_to_class :badge, :avatar_frame_url= do |value|
-    self.custom_fields["avatar_frame_url"] = value
-  end
-  
-  # 扩展Badge序列化器，添加头像框字段
+  #  Badge类已经通过迁移添加了这两个字段，所以不需要 add_to_class
+
+  #  扩展Badge序列化器，添加头像框字段
   add_to_serializer :badge, :avatar_frame_enabled do
     object.avatar_frame_enabled
   end
-  
+
   add_to_serializer :badge, :avatar_frame_url do
     object.avatar_frame_url
   end
-  
-  add_to_serializer :badge, :custom_fields, include_condition: false do
-    object.custom_fields
-  end
-  
-  # 创建头像框控制器
+
+  #  创建头像框控制器
   module ::DiscourseBadges
     class AvatarFrameController < ::ApplicationController
       requires_login
       skip_before_action :check_xhr
       before_action :ensure_admin
-      
+
       def update
-        badge_id = params[:badge_id]
-        badge = Badge.find(badge_id)
-        
-        # 更新徽章头像框设置
+        badge = Badge.find(params[:badge_id])
         badge.avatar_frame_enabled = params[:avatar_frame_enabled] == "true"
         badge.avatar_frame_url = params[:avatar_frame_url]
-        badge.save_custom_fields(true)
-        
+        badge.save!
+
         render json: success_json
       end
-      
+
       def upload
-        badge_id = params[:badge_id]
-        badge = Badge.find(badge_id)
-        
-        # 处理上传
+        badge = Badge.find(params[:badge_id])
+
         params.require(:file)
         upload = UploadCreator.new(params[:file], "avatar_frame").create_for(current_user.id)
-        
+
         if upload.present? && upload.persisted?
           badge.avatar_frame_url = upload.url
-          badge.save_custom_fields(true)
-          
+          badge.save!
           render json: { url: upload.url }
         else
           render json: { errors: upload.errors.full_messages }, status: 422
         end
       end
-      
+
       private
-      
+
       def ensure_admin
         raise Discourse::InvalidAccess.new unless current_user&.admin?
       end
     end
   end
-  
-  # 添加路由
+
+  #  添加路由
   Discourse::Application.routes.append do
     put "/admin/badges/:badge_id/avatar_frame" => "discourse_badges/avatar_frame#update"
     post "/admin/badges/:badge_id/avatar_frame/upload" => "discourse_badges/avatar_frame#upload"
   end
-  
-  # 扩展用户序列化器，获取头像框URL
+
+  #  扩展用户序列化器，获取头像框URL
   add_to_serializer :user, :avatar_frame_url do
-    # 获取用户已启用的徽章，并按featured_rank排序
     frame_badge = UserBadge.where(user_id: object.id)
-                          .joins(:badge)
-                          .where("badges.enabled = true")
-                          .where("badges.show_posts = true")
-                          .where("badges.listable = true")
-                          .order("user_badges.featured_rank ASC")
-                          .first&.badge
-    
-    # 只有当徽章启用了头像框并有URL时，才返回头像框URL
+      .joins(:badge)
+      .where("badges.enabled = true AND badges.show_posts = true AND badges.listable = true")
+      .order("user_badges.featured_rank ASC")
+      .first&.badge
+
     if frame_badge&.avatar_frame_enabled && frame_badge&.avatar_frame_url.present?
       frame_badge.avatar_frame_url
     else
       nil
     end
   end
-  
-  # 添加当前用户的头像框URL
+
   add_to_serializer :current_user, :avatar_frame_url do
-    # 获取用户已启用的徽章，并按featured_rank排序
     frame_badge = UserBadge.where(user_id: object.id)
-                          .joins(:badge)
-                          .where("badges.enabled = true")
-                          .where("badges.show_posts = true")
-                          .where("badges.listable = true")
-                          .order("user_badges.featured_rank ASC")
-                          .first&.badge
-    
-    # 只有当徽章启用了头像框并有URL时，才返回头像框URL
+      .joins(:badge)
+      .where("badges.enabled = true AND badges.show_posts = true AND badges.listable = true")
+      .order("user_badges.featured_rank ASC")
+      .first&.badge
+
     if frame_badge&.avatar_frame_enabled && frame_badge&.avatar_frame_url.present?
       frame_badge.avatar_frame_url
     else
       nil
     end
   end
+
 end

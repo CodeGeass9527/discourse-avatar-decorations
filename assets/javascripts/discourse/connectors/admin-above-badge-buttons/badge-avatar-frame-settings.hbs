@@ -1,24 +1,23 @@
+{{! 如果站点启用了徽章头像框功能 }}
 {{#if this.siteSettings.avatar_frame_enabled}}
   <div class="badge-avatar-frame-settings">
     <h3>{{i18n "admin.badges.avatar_frame_settings"}}</h3>
 
     <div class="control-group">
       <label class="checkbox-label">
-        <Input
-          @type="checkbox"
-          @checked={{eq this.model.custom_fields.avatar_frame_enabled "true"}}
-        />
+        <Input @type="checkbox" @checked={{this.model.avatar_frame_enabled}} />
         {{i18n "admin.badges.avatar_frame_enabled"}}
       </label>
     </div>
 
-    {{#if this.model.custom_fields.avatar_frame_enabled}}
+    {{! 如果该徽章启用了头像框功能 }}
+    {{#if this.model.avatar_frame_enabled}}
       <div class="control-group">
         <label>{{i18n "admin.badges.avatar_frame_url"}}</label>
         <Input
           @type="text"
           class="input-xxlarge"
-          @value={{this.model.custom_fields.avatar_frame_url}}
+          @value={{this.model.avatar_frame_url}}
         />
       </div>
 
@@ -28,16 +27,15 @@
         </button>
       </div>
 
-      {{#if this.model.custom_fields.avatar_frame_url}}
+      {{! 如果设置了头像框 URL，则展示预览 }}
+      {{#if this.model.avatar_frame_url}}
         <div class="badge-avatar-frame-preview">
           <img src="https://via.placeholder.com/80" alt="Avatar placeholder" />
           <div
             class="badge-avatar-frame"
             style={{html-safe
               (concat
-                "background-image: url('"
-                this.model.custom_fields.avatar_frame_url
-                "')"
+                "background-image: url('" this.model.avatar_frame_url "')"
               )
             }}
           ></div>

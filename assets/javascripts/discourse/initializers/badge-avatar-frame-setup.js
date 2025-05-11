@@ -10,8 +10,8 @@ export default {
     withPluginApi("0.8.31", (api) => {
       // 扩展徽章编辑界面，添加头像框设置
       api.modifyClass("controller:admin-badges-show", {
-        avatarFrameEnabled: alias("model.custom_fields.avatar_frame_enabled"),
-        avatarFrameUrl: alias("model.custom_fields.avatar_frame_url"),
+        avatarFrameEnabled: alias("model.avatar_frame_enabled"),
+        avatarFrameUrl: alias("model.avatar_frame_url"),
 
         actions: {
           save() {
@@ -67,40 +67,6 @@ export default {
           },
         },
       });
-
-      // // 装饰用户头像，添加头像框
-      // api.decorateWidget("user-avatar::after", (helper) => {
-      //   const attrs = helper.attrs;
-
-      //   if (attrs.user && attrs.user.avatar_frame_url) {
-      //     return helper.h("div.badge-avatar-frame", {
-      //       attributes: {
-      //         style: `background-image: url('${attrs.user.avatar_frame_url}')`,
-      //       },
-      //     });
-      //   }
-      // });
-
-      // // 装饰用户卡片头像
-      // api.reopenWidget("user-card-avatar", {
-      //   buildClasses(attrs) {
-      //     return `${this._super(attrs)} user-card-avatar`;
-      //   },
-
-      //   html(attrs) {
-      //     const user = attrs.user;
-
-      //     const result = this._super(attrs);
-      //     return [
-      //       ...result,
-      //       this.h("div.badge-avatar-frame", {
-      //         attributes: {
-      //           style: `background-image: url('${user.avatar_frame_url}')`,
-      //         },
-      //       }),
-      //     ];
-      //   },
-      // });
 
       // 装饰帖子头像
       api.decorateWidget("post-avatar::after", (helper) => {
