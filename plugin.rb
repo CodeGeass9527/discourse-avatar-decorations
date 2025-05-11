@@ -132,3 +132,4 @@ after_initialize do
       nil
     end
   end
+end
